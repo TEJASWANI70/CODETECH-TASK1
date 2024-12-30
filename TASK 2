@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StudentController controller = new StudentController();
+
+        while (true) {
+            System.out.println("1. Add Student");
+            System.out.println("2. View All Students");
+            System.out.println("3. Search Student");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter ID: ");
+                    String id = scanner.next();
+                    System.out.print("Enter Name: ");
+                    String name = scanner.next();
+                    System.out.print("Enter number of grades: ");
+                    int numGrades = scanner.nextInt();
+                    double[] grades = new double[numGrades];
+                    for (int i = 0; i < numGrades; i++) {
+                        System.out.print("Enter grade " + (i + 1) + ": ");
+                        grades[i] = scanner.nextDouble();
+                    }
+                    controller.addStudent(new StudentGradeTracker(id, name, grades));
+                    System.out.println("Student added successfully!");
+                   break;
+
+                case 2:
+                    for (StudentGradeTracker student : controller.getAllStudents()) {
+                        System.out.println("ID: " + student.getId() + ", Name: " + student.getName() +
+                                           ", Average: " + student.getAverage() +
+                                           ", Grade: " + student.getGradeLetter());
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter Student ID: ");
+                    String searchId = scanner.next();
+                    StudentGradeTracker student = controller.searchStudentById(searchId);
+                    if (student != null) {
+                        System.out.println("ID: " + student.getId() + ", Name: " + student.getName() +
+                                           ", Average: " + student.getAverage() +
+                                           ", Grade: " + student.getGradeLetter());
+                    } else {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
