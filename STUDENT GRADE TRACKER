@@ -1,0 +1,41 @@
+public class StudentGradeTracker {
+    private String id;
+    private String name;
+    private double[] grades;
+
+    public StudentGradeTracker(String id, String name, double[] grades) {
+        this.id = id;
+        this.name = name;
+        this.grades = grades;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double[] getGrades() {
+        return grades;
+    }
+
+    public double getAverage() {
+        double sum = 0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.length;
+    }
+
+    public String getGradeLetter() {
+        double avg = getAverage();
+        if (avg >= 90) return "A";
+        if (avg >= 80) return "B";
+        if (avg >= 70) return "C";
+        if (avg >= 60) return "D";
+        return "F";
+    }
+}
+
