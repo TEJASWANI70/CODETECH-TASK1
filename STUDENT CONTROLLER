@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+
+public class StudentController {
+    private ArrayList<StudentGradeTracker> students;
+
+    public StudentController() {
+        students = new ArrayList<>();
+    }
+
+    public void addStudent(StudentGradeTracker student) {
+        students.add(student);
+    }
+
+    public StudentGradeTracker searchStudentById(String id) {
+        for (StudentGradeTracker student : students) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<StudentGradeTracker> getAllStudents() {
+        return students;
+    }
+}
